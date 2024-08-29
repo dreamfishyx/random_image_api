@@ -46,7 +46,9 @@
    docker exec -it api /app/update_api_key.sh
    ```
 
-5. 通过访问`http://localhost:5000/random-image?key=xxxxxxxxxxxx`来测试`API`，它会随机返回一张图片。
+5. 初始key在`api_key.txt`中,但是不建议使用。请按照上述命令更新key,更新后原来的key失效(含初始key)。
+
+6. 通过访问`http://localhost:5000/random-image?key=xxxxxxxxxxxx`来测试`API`，它会随机返回一张图片。
 
 ---
 
