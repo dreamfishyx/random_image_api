@@ -1,14 +1,13 @@
 FROM python:3.11-slim
 
-RUN echo "deb http://mirrors.ustc.edu.cn/debian/ bookworm main non-free contrib" > /etc/apt/sources.list \
-    && echo "deb-src http://mirrors.ustc.edu.cn/debian/ bookworm main non-free contrib" >> /etc/apt/sources.list \
-    && echo "deb http://mirrors.ustc.edu.cn/debian-security bookworm-security main" >> /etc/apt/sources.list \
-    && echo "deb-src http://mirrors.ustc.edu.cn/debian-security bookworm-security main" >> /etc/apt/sources.list \
-    && echo "deb http://mirrors.ustc.edu.cn/debian/ bookworm-updates main" >> /etc/apt/sources.list \
-    && echo "deb-src http://mirrors.ustc.edu.cn/debian/ bookworm-updates main" >> /etc/apt/sources.list \
-    && pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
-
-RUN apt-get update \
+RUN echo "deb http://mirrors.aliyun.com/debian/ bookworm main non-free contrib" > /etc/apt/sources.list \
+    && echo "deb-src http://mirrors.aliyun.com/debian/ bookworm main non-free contrib" >> /etc/apt/sources.list \
+    && echo "deb http://mirrors.aliyun.com/debian-security bookworm-security main" >> /etc/apt/sources.list \
+    && echo "deb-src http://mirrors.aliyun.com/debian-security bookworm-security main" >> /etc/apt/sources.list \
+    && echo "deb http://mirrors.aliyun.com/debian/ bookworm-updates main" >> /etc/apt/sources.list \
+    && echo "deb-src http://mirrors.aliyun.com/debian/ bookworm-updates main" >> /etc/apt/sources.list \
+    && pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/ \
+    && apt-get update \
     && apt-get install -y \
        imagemagick \
        libwebp-dev \
@@ -16,7 +15,9 @@ RUN apt-get update \
        file \
        webp \
     && pip install --upgrade pip \
-    && pip install Flask 
+    && pip install Flask \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY . /app
