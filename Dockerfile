@@ -13,7 +13,6 @@ RUN echo "deb http://mirrors.ustc.edu.cn/debian/ bookworm main non-free contrib"
 # 安装必要的软件包和工具
 RUN apt-get update \
     && apt-get install -y \
-       apt-utils \
        libwebp-dev \
        openssl \
        file \
