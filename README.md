@@ -23,7 +23,7 @@
 
 1. 使用前提：正确安装`docker`,并可以正常拉取镜像。
 
-2. 克隆仓库：(图片内存有点的,可能有些慢)
+2. 克隆仓库：(图片内存有点的,可能有些慢,可以尝试直接复制文件内容)
 
    ```bash
    git clone https://github.com/dreamfishyx/random_image_api.git
