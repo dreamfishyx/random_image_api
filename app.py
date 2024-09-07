@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify, send_file
 from functools import wraps
+from flask_cors import CORS
 import os
 import secrets
 import random
 
 app = Flask(__name__)
+CORS(app) 
 
 API_KEY_FILE = '/app/api_key.txt'
 

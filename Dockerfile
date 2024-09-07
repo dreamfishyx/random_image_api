@@ -16,6 +16,7 @@ RUN echo "deb http://mirrors.aliyun.com/debian/ bookworm main non-free contrib" 
        webp \
     && pip install --upgrade pip \
     && pip install Flask \
+    && pip install flask-cors \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
