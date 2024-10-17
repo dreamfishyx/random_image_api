@@ -5,47 +5,69 @@
 ##### 项目结构
 
 ```tex
-/image-api
-|-- Dockerfile (docker镜像构建文件)
-|-- app.py (服务)
-|-- api_key.txt (初始key)
-|-- convert_images.sh (将/images图片转为webp格式,非图片删除,可能会误删,建议图片格式png、jpg、webp)
-|-- update_api_key.sh (生成或更新key)
-|-- /images (存放用于随机读取的图片)
+./image-api
+├── app
+│   ├── api_key.txt(初始api_key)
+│   ├── app.py(服务)
+│   ├── convert_images.sh(将/images图片转为webp格式,非图片删除,可能会误删,建议图片格式png、jpg、webp)
+│   └── update_api_key.sh(生成或更新key)
+├── Dockerfile(docker镜像构建文件)
+└── README.md
 ```
 
 ---
 
-##### 使用
+1. ##### 构建
 
-1. 使用前提：正确安装`docker`,并可以正常拉取镜像。
+   1. 方式一:使用 docker hub拉取(待补)
 
-2. 克隆仓库：(图片内存有点大,可能有些慢)
+   2. 方式二:使用阿里云镜像仓库拉取(待补)
 
-   ```bash
-   git clone https://github.com/dreamfishyx/random_image_api.git
-   
-   cd ./random_image_api
-   ```
+   3. 方式三:手动构建
 
-3. 在`images`中准备好你所需要的图片文件(非图片格式在构建镜像时会被删除)。`images`中内置一些我自己收藏的壁纸(图片来源于网络,不可商用),不喜欢的可以自行筛选删除,但请确保构建镜像前`images`文件夹不为空。
+      ```bash
+      # 克隆
+      git clone --depth 1 https://github.com/dreamfishyx/random_image_api.git
+      
+      # 进入目录
+      cd ./random_image_api
+      
+      # 构建镜像
+      docker build -t random-image-api .
+      ```
 
-4. 构建并启动镜像后重置key(镜像名、容器名可自定义)：在构建镜像的图片格式转换过程，若图片较大转换可能比较慢，此外更新源的过程也比较慢。
 
-   ```bash
-   # 构建镜像
-   docker build -t random-image-api .
-   
-   # 运行容器
-   docker run -dp 5000:5000 --name api random-image-api
-   
-   # 更新key
-   docker exec -it api /app/update_api_key.sh
-   ```
+   > 若是构建过程中拉取镜像超时,可以尝试使用镜像加速。但是目前很多镜像加速都用不了,额...可以试着自己利用开源项目搭建一个自己的私人镜像加速。
 
-5. 初始key在`api_key.txt`中,但是不建议使用。请按照上述命令更新key,更新后原来的key失效(含初始key)。
+   ---
 
-6. 通过访问`http://localhost:5000/random-image/xxxxxx you key xxxxxx`来测试`API`，它会随机返回一张图片。
+   ##### 运行
+
+   1. 创建并启动容器：
+
+      1. 创建数据卷: `docker volume create random-image-api`。
+      2. 创建并运行容器: `docker run -v ~/random-image:/app/images -v ~/flask/log:/app/log -dp 5000:5000 --name image_api random-image-api`。
+
+   2. 访问图片：
+
+      1. 查看初始 api-key: `docker exec -it image_api cat /app/api_key.txt`，实际上其默认值为`f52b63814da6efc0d3e5fa5d7ba5790698ee87a34c4fb2c15de9520155ea82cb`。
+      2. 访问格式为:`http://localhost:5000/random-image/<your_api_key>`(初始状态没有图片，无法访问，参考下面方式添加图片)。
+
+   3. 更新api-key(初始时建议更新):
+
+      1. 首先手动更新 api-key文件:`docker exec -it image_api  /app/update_api_key.sh`(此时应用未更新，api-key未改变)。
+      2. 访问`http://localhost:5000/update-key/<your_api_key>`更新应用api-key改变((api-key更新)。
+
+   4. 添加或者修改图片:
+
+      1. 向系统目录 `~/random-image` 中添加或者删除图片(非图片格式在构建镜像时会被删除)。
+
+      2. 执行脚本对容器图片进行格式转换:`docker exec -it image_api /app/convert_images.sh`。
+
+      3. 访问`http://localhost:5000/update-images/<your_api_key>`更新应用图片列表，需要等待一段时间。
+
+   5. 目前这个镜像的优化应该会告一段落。
+
 
 ---
 
