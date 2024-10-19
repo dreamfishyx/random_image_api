@@ -28,4 +28,4 @@ RUN chmod +x /app/convert_images.sh /app/update_api_key.sh
 
 EXPOSE 5000
 
-CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:5000", "--timeout", "37", "app:app"]
+CMD ["python","app.py"]

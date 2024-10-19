@@ -87,20 +87,20 @@ def random_image(key):
     return send_file(os.path.join(IMAGE_DIR, selected_image), mimetype="image/webp")
 
 
-handler = RotatingFileHandler(
-    "/app/log/app.log", maxBytes=10 * 1024 * 1024, backupCount=10
-)
-handler.setLevel(logging.INFO)
-formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-handler.setFormatter(formatter)
-logging.getLogger().addHandler(handler)
-logging.getLogger().addHandler(logging.StreamHandler())
-logging.getLogger().setLevel(logging.INFO)
-
-parse_image_list()
-
-app.config["API_KEY"] = read_api_key()
-logging.info(f"API key init:{app.config['API_KEY']}")
-if not app.config["API_KEY"]:
-    logging.error("API key not found or invalid. Exiting.")
-    exit(1)
+if __name__ == "__main__":
+    handler = RotatingFileHandler(
+        "/app/log/app.log", maxBytes=10 * 1024 * 1024, backupCount=10
+    )
+    handler.setLevel(logging.INFO)
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    handler.setFormatter(formatter)
+    logging.getLogger().addHandler(handler)
+    logging.getLogger().addHandler(logging.StreamHandler())
+    logging.getLogger().setLevel(logging.INFO)
+    parse_image_list()
+    app.config["API_KEY"] = read_api_key()
+    logging.info(f"API key init:{app.config['API_KEY']}")
+    if not app.config["API_KEY"]:
+        logging.error("API key not found or invalid. Exiting.")
+        exit(1)
+    app.run(host="0.0.0.0", port=5000)
