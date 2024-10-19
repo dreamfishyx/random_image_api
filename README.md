@@ -1,6 +1,7 @@
 # random_image_api
 
-> 基于python+docker搭建个人的随机获取图片API,在构建博客时存在这个需求,于是编写了这个镜像。嗯...说实话...好low啊...hah
+> - 基于python+docker搭建个人的随机获取图片API,在构建博客时存在这个需求,于是编写了这个镜像。嗯...说实话...有点low。
+> - 其实2.0中是采用 `CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:5000", "--timeout", "37", "app:app"]` 启动，不知到是否是参数设置的问题，响应速度特别慢，最终还是改回 `CMD ["python","app.py"]` 得到3.0版本。
 
 ##### 项目结构
 
@@ -19,9 +20,9 @@
 
 1. ##### 构建
 
-   1. 方式一:使用 docker hub拉取: `docker pull dreamfishyx/random-image-api:2.0`。
+   1. 方式一:使用 docker hub拉取: `docker pull dreamfishyx/random-image-api:3.0`。
 
-   2. 方式二:使用阿里云镜像仓库拉取: `docker pull crpi-h14u4qrsee050ru5.cn-hangzhou.personal.cr.aliyuncs.com/dreamfishyx/random-image-api:2.0`
+   2. 方式二:使用阿里云镜像仓库拉取: `docker pull crpi-h14u4qrsee050ru5.cn-hangzhou.personal.cr.aliyuncs.com/dreamfishyx/random-image-api:3.0`
 
    3. 方式三:手动构建(推荐)
 
@@ -56,7 +57,7 @@
    3. 更新api-key(初始时建议更新):
 
       1. 首先手动更新 api-key文件:`docker exec -it image_api  /app/update_api_key.sh`(此时应用未更新，api-key未改变)。
-      2. 访问`http://localhost:5000/update-key/<your_api_key>`更新应用api-key改变((api-key更新)。
+      2. 访问`http://localhost:5000/update-key/<your_api_key>`更新应用api-key改变((api-key更新)，可能需要等待一段时间(还不行就再次访问，直至返回Unauthorized)。
 
    4. 添加或者修改图片:
 
