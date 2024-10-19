@@ -20,9 +20,9 @@
 
 1. ##### 构建
 
-   1. 方式一:使用 docker hub拉取: `docker pull dreamfishyx/random-image-api:3.0`。
+   1. 方式一:从 docker hub拉取: `docker pull dreamfishyx/random-image-api:3.0`。
 
-   2. 方式二:使用阿里云镜像仓库拉取: `docker pull crpi-h14u4qrsee050ru5.cn-hangzhou.personal.cr.aliyuncs.com/dreamfishyx/random-image-api:3.0`
+   2. 方式二:从阿里云镜像仓库拉取: `docker pull crpi-h14u4qrsee050ru5.cn-hangzhou.personal.cr.aliyuncs.com/dreamfishyx/random-image-api:3.0`
 
    3. 方式三:手动构建(推荐)
 
