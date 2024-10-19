@@ -1,6 +1,6 @@
 # random_image_api
 
-> 基于python+docker搭建个人的随机获取图片API(脚本仅支持linux使用),在构建博客时存在这个需求,于是编写了这个镜像。嗯...说实话...好low啊...hah
+> 基于python+docker搭建个人的随机获取图片API,在构建博客时存在这个需求,于是编写了这个镜像。嗯...说实话...好low啊...hah
 
 ##### 项目结构
 
@@ -21,7 +21,7 @@
 
    1. 方式一:使用 docker hub拉取(推荐): `docker pull dreamfishyx/random-image-api:2.0`。
 
-   2. 方式二:使用阿里云镜像仓库拉取(待补)
+   2. 方式二:使用阿里云镜像仓库拉取: `docker pull crpi-h14u4qrsee050ru5.cn-hangzhou.personal.cr.aliyuncs.com/dreamfishyx/random-image-api:2.0`
 
    3. 方式三:手动构建
 
