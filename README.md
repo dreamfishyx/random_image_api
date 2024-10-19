@@ -19,11 +19,11 @@
 
 1. ##### 构建
 
-   1. 方式一:使用 docker hub拉取(推荐): `docker pull dreamfishyx/random-image-api:2.0`。
+   1. 方式一:使用 docker hub拉取: `docker pull dreamfishyx/random-image-api:2.0`。
 
    2. 方式二:使用阿里云镜像仓库拉取: `docker pull crpi-h14u4qrsee050ru5.cn-hangzhou.personal.cr.aliyuncs.com/dreamfishyx/random-image-api:2.0`
 
-   3. 方式三:手动构建
+   3. 方式三:手动构建(推荐)
 
       ```bash
       # 克隆
@@ -36,8 +36,8 @@
       docker build -t random-image-api .
       ```
 
-
    > 若是构建过程中拉取镜像超时,可以尝试使用镜像加速。但是目前很多镜像加速都用不了,额...可以试着自己利用开源项目搭建一个自己的私人镜像加速。
+
 
    ---
 
@@ -46,7 +46,7 @@
    1. 创建并启动容器：
 
       1. 创建数据卷: `docker volume create random-image-api`。
-      2. 创建并运行容器: `docker run -v ~/random-image:/app/images -v ~/flask/log:/app/log -dp 5000:5000 --name image_api random-image-api`。
+      2. 创建并运行容器: `docker run -v ~/random-image:/app/images -v ~/flask/log:/app/log -dp 5000:5000 --name image_api random-image-api`(从镜像中心拉取的话，镜像名称可能不一样，自行更改)。
 
    2. 访问图片：
 
