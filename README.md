@@ -44,10 +44,7 @@
 
    ##### 运行
 
-   1. 创建并启动容器：
-
-      1. 创建数据卷: `docker volume create random-image-api`。
-      2. 创建并运行容器: `docker run -v ~/random-image:/app/images -v ~/flask/log:/app/log -dp 5000:5000 --name image_api random-image-api`(从镜像中心拉取的话，镜像名称可能不一样，自行更改)。
+   1. 创建并启动容器：创建并运行容器: `docker run -v ~/random-image:/app/images -v ~/flask/log:/app/log -dp 5000:5000 --name image_api random-image-api`(从镜像中心拉取的话，镜像名称可能不一样，自行更改)。
 
    2. 访问图片：
 
